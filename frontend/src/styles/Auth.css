@@ -1,0 +1,74 @@
+/* Full page center */
+.auth-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f4f6f8;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Card */
+.auth-card {
+  width: 380px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 35px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.auth-card h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+/* Inputs */
+.auth-input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: #0d1b2a;
+}
+
+/* Button */
+.auth-btn {
+  width: 110%;
+  padding: 12px;
+  background: linear-gradient(135deg, #0d1b2a, #1b263b);
+  color: white;
+  border: none;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  /* margin-top: 5px; */
+}
+
+.auth-btn:hover {
+  opacity: 0.95;
+}
+
+/* Footer text */
+.auth-footer {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 14px;
+}
+
+.auth-footer a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
