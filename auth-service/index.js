@@ -50,8 +50,6 @@ app.use("/auth", require("./routes/auth"));
 
 const PORT = process.env.PORT || 3001;
 
-app.listen(PORT, () => {
-  console.log("=================================");
-  console.log(`🚀 Auth Service running on port ${PORT}`);
-  console.log("=================================");
-});
+app.listen(process.env.PORT, "0.0.0.0", () =>
+  console.log(`Core running on ${process.env.PORT}`)
+);

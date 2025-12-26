@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "../src/styles/Dashboard.css";
 
+const CORE_BASE_URL = process.env.REACT_APP_CORE_BASE_URL;
+
 export default function Dashboard() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
@@ -15,12 +17,12 @@ export default function Dashboard() {
     }
 
     axios
-      .get("http://localhost:3002/welcome", {
+      .get(`${CORE_BASE_URL}/welcome`, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       })
-      .then(res => {
+      .then((res) => {
         setMessage(res.data.message);
       })
       .catch(() => {
