@@ -1,0 +1,66 @@
+version: "3.8"
+
+services:
+  frontend:
+    container_name: react-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "${REACT_PORT}:3000"
+    environment:
+      - REACT_APP_AUTH_BASE_URL=${REACT_APP_AUTH_BASE_URL}
+      - REACT_APP_CORE_BASE_URL=${REACT_APP_CORE_BASE_URL}
+    depends_on:
+      - auth-service
+      - core-service
+    networks:
+      - healthcare
+
+  auth-service:
+    container_name: auth-service
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    ports:
+      - "${AUTH_PORT}:3001"
+    environment:
+      - PORT=${AUTH_PORT}
+      - JWT_SECRET=${JWT_SECRET}
+
+      # DB
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - DB_PORT=${DB_PORT}
+
+      # SMTP
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+
+      # Frontend
+      - FRONTEND_URL=${FRONTEND_URL}
+    networks:
+      - healthcare
+
+  core-service:
+    container_name: core-service
+    build:
+      context: ./core-service
+      dockerfile: Dockerfile
+    ports:
+      - "${CORE_PORT}:3002"
+    environment:
+      - PORT=${CORE_PORT}
+      - JWT_SECRET=${JWT_SECRET}
+    depends_on:
+      - auth-service
+    networks:
+      - healthcare
+
+networks:
+  healthcare:
+    driver: bridge
