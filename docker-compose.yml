@@ -56,6 +56,12 @@ services:
     environment:
       - PORT=${CORE_PORT}
       - JWT_SECRET=${JWT_SECRET}
+      # DB
+      - DB_HOST=${CORE_DB_HOST}
+      - DB_USER=${CORE_DB_USER}
+      - DB_PASSWORD=${CORE_DB_PASSWORD}
+      - DB_NAME=${CORE_DB_NAME}
+      - DB_PORT=3306
     depends_on:
       - auth-service
     networks:
