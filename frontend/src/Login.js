@@ -5,14 +5,20 @@ import "../src/styles/Auth.css";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState("");
 
   const login = async () => {
-    const res = await axios.post("http://localhost:3001/auth/login", {
-      email,
-      password
-    });
-    localStorage.setItem("token", res.data.token);
-    window.location = "/dashboard";
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_AUTH_BASE_URL}/auth/login`,
+        { email, password }
+      );
+      localStorage.setItem("token", res.data.token);
+      window.location = "/dashboard";
+    } catch (error) {
+      console.error(error);
+      setMsg("Invalid email or password");
+    }
   };
 
   return (
@@ -38,6 +44,8 @@ export default function Login() {
           Login
         </button>
 
+        {msg && <p style={{ textAlign: "center", color: "red" }}>{msg}</p>}
+
         <div className="auth-footer">
           Don't have an account? <a href="/register">Register</a>
         </div>
@@ -45,3 +53,4 @@ export default function Login() {
     </div>
   );
 }
+
