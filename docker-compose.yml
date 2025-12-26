@@ -23,7 +23,7 @@ services:
       context: ./auth-service
       dockerfile: Dockerfile
     ports:
-      - "${AUTH_PORT}:3001"
+      - "${AUTH_PORT}:${AUTH_PORT}"
     environment:
       - PORT=${AUTH_PORT}
       - JWT_SECRET=${JWT_SECRET}
@@ -52,7 +52,7 @@ services:
       context: ./core-service
       dockerfile: Dockerfile
     ports:
-      - "${CORE_PORT}:3002"
+      - "${CORE_PORT}:${CORE_PORT}"
     environment:
       - PORT=${CORE_PORT}
       - JWT_SECRET=${JWT_SECRET}

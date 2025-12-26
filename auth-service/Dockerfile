@@ -7,5 +7,5 @@ RUN npm ci --only=production
 
 COPY . .
 
-EXPOSE 3001
+EXPOSE ${AUTH_PORT}
 CMD ["node", "index.js"]

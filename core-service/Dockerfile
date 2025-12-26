@@ -7,5 +7,5 @@ RUN npm ci --only=production
 
 COPY . .
 
-EXPOSE 3002
+EXPOSE ${CORE_PORT}
 CMD ["node", "index.js"]
