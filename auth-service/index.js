@@ -1,32 +1,9 @@
-// const express = require("express");
-// require("dotenv").config();
-
-// const app = express();
-// app.use(express.json());
-
-// app.use("/auth", require("./routes/auth"));
-
-// app.listen(process.env.PORT, () =>
-//   console.log(`Auth running on ${process.env.PORT}`)
-// );
-
-
-/**
- * Auth Service Entry Point
- */
-
-require("dotenv").config(); // MUST be first
-
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
 const app = express();
 
-/* =======================
-   MIDDLEWARE
-======================= */
-
-// Enable CORS for React frontend
 app.use(
   cors({
     origin: "*",
@@ -35,21 +12,17 @@ app.use(
   })
 );
 
-// Parse JSON body
 app.use(express.json());
-
-/* =======================
-   ROUTES
-======================= */
 
 app.use("/auth", require("./routes/auth"));
 
-/* =======================
-   SERVER START
-======================= */
+
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "Auth service is running" });
+});
 
 const PORT = process.env.PORT || 3001;
 
-app.listen(process.env.PORT, "0.0.0.0", () =>
-  console.log(`Core running on ${process.env.PORT}`)
-);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`✅ Auth service running on port ${PORT}`);
+});
